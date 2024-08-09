@@ -5,13 +5,15 @@ import os
 
 # Set the workspace and environment settings
 
-arcpy.env.workspace = r"C:\Users\haiyu\OneDrive\Desktop\UNMC\231119_PM2.5\NASAEarthData"
+arcpy.env.workspace = #workspace folder path
 arcpy.env.overwriteOutput = True
 
-shapefile = r"C:\Users\haiyu\OneDrive\Desktop\UNMC\231119_PM2.5\CONUS_counties_2016\CONUS_counties_2016.shp"
+shapefile = # .shp file that defines geographical division
 
+# extract all .nc file in data folder
+# to be revised based on file type
 nc_list = []
-folder_path = r"C:\Users\haiyu\OneDrive\Desktop\UNMC\231119_PM2.5\NASAEarthData"
+folder_path = #folder path
 for file_name in os.listdir(folder_path):
     #print(file_name)
     if '.nc' in file_name and '.aux' not in file_name:
@@ -19,10 +21,10 @@ for file_name in os.listdir(folder_path):
 print(nc_list[0:5])
 
 # variables of interest
-variables = [ 'Rainf', 'Wind_E', 'Wind_N', 'Tair']
+variables = # list of variables of interest 
 
 # Load the NetCDF File and Extract Variables
-netcdf_file_path = r"C:\Users\haiyu\OneDrive\Desktop\UNMC\231119_PM2.5\NASAEarthData\\"
+netcdf_file_path = ## path to data folder 
 
 for file in nc_list:
     print('processing: ' + file)
@@ -46,8 +48,7 @@ for file in nc_list:
         raster_layers.append(raster_layer)
 
 
-    output_folder = r"C:\Users\haiyu\OneDrive\Desktop\UNMC\231119_PM2.5\NASAEarthData\Results" # your output folder
-
+    output_folder = #output path 
     # Create the output folder if it doesn't exist
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -63,7 +64,7 @@ for file in nc_list:
             statistics_type="ALL"
         )
 
-
+    ## csv_file_name is subject to change 
     for i, raster_layer in enumerate(raster_layers):
         dbf_table = os.path.join(output_folder, f"Variable_{variables[i]}.dbf")
         csv_file_name = netcdf_file[-13:-7] + f"_{variables[i]}.csv"

@@ -5,7 +5,7 @@ import os
 folder_path = ## folder where all .bil data stored
 
 # .shp file path: can be county level or other geo division
-shapefile = r"C:\Users\haiyu\OneDrive\Desktop\UNMC\231119_PM2.5\CONUS_counties_2016\CONUS_counties_2016.shp"
+shapefile = ## your .shp file
 
 # result folder
 output_folder = os.path.join(folder_path, "Results")

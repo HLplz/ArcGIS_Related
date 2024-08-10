@@ -60,7 +60,14 @@ for file_name in os.listdir(folder_path):
                 print(f"Processed: {new_csv_file_name}")
             else:
                 print(f"Error: Zonal statistics table not created for {raster_layer_name}")
-                
+            arcpy.Delete_management(raster_layer)
+                arcpy.Delete_management(zonal_table)
+                arcpy.Delete_management(csv_file_name)
+                arcpy.Delete_management("in_memory")
+             dbf_file_path = os.path.splitext(bil_file)[0] + ".dbf"
+                if os.path.exists(dbf_file_path):
+                    os.remove(dbf_file_path)
+                    print(f"Deleted DBF file: {dbf_file_path}")
         except arcpy.ExecuteError as e:
             # Handle specific ArcPy errors
             print(f"ArcPy error processing {raster_layer_name}: {e}")
